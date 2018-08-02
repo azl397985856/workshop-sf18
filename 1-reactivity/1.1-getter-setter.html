@@ -1,5 +1,19 @@
 <script>
-function convert (obj) {
-  // Implement this!
-}
+  function convert(obj) {
+    for (let key in obj) {
+      let value = obj[key];
+      Object.defineProperty(obj, key, {
+        get() {
+          // 这里不能是obj[key]，否则会循环引用报错
+          console.log(`getting key "${key}": ${value}`);
+          return value
+        },
+        set(v) {
+          console.log(`setting key "${key}" to: ${v}`);
+          value = v;
+        }
+      })
+    }
+
+  }
 </script>
