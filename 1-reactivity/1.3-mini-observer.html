@@ -1,9 +1,33 @@
 <script>
-function observe (obj) {
-  // Implement this!
-}
+  function convert(obj, update) {
+    for (let key in obj) {
+      let value = obj[key];
+      Object.defineProperty(obj, key, {
+        get() {
+          return value
+        },
+        set(v) {
+          value = v;
+          update({
+            ...obj,
+            key: v
+          })
+        }
+      })
+    }
 
-function autorun (update) {
-  // Implement this!
-}
+  }
+  function observe(obj, update) {
+    ob = obj
+    if (update) {
+      convert(obj, update)
+    }
+  }
+
+  function autorun(update) {
+    if (ob) {
+      observe(ob, update)
+    }
+    update()
+  }
 </script>

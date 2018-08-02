@@ -1,11 +1,22 @@
 <script>
-// a class representing a dependency
-// exposing it on window is necessary for testing
-window.Dep = class Dep {
-  // Implement this!
-}
+  // a class representing a dependency
+  // exposing it on window is necessary for testing
+  window.Dep = class Dep {
+    constructor() {
 
-function autorun (update) {
-  // Implement this!
-}
+    }
+    depend() {
+
+    }
+    notify() {
+      if (up) {
+        autorun(up)
+      }
+    }
+  }
+
+  function autorun(update) {
+    up = update
+    up()
+  }
 </script>
