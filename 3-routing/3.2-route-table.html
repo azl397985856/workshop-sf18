@@ -2,29 +2,37 @@
 
 <div id="app">
   <!-- render main view here -->
+  <component :is="routeTable[hash] || NotFound"></component>
   <a href="#foo">foo</a>
   <a href="#bar">bar</a>
 </div>
 
 <script>
-// '#/foo' -> Foo
-// '#/bar' -> Bar
-// '#/404' -> NotFound
+  // '#/foo' -> Foo
+  // '#/bar' -> Bar
+  // '#/404' -> NotFound
 
-const Foo = { template: `<div>foo</div>` }
-const Bar = { template: `<div>bar</div>` }
-const NotFound = { template: `<div>not found!</div>` }
+  const Foo = { template: `<div>foo</div>` }
+  const Bar = { template: `<div>bar</div>` }
+  const NotFound = { template: `<div>not found!</div>` }
 
-const routeTable = {
-  // Implement this!
-}
+  const routeTable = {
+    '#foo': Foo,
+    '#bar': Bar
+  }
 
-window.addEventListener('hashchange', () => {
-  // Implement this!
-})
+  window.addEventListener('hashchange', () => {
+    app.hash = window.location.hash
+  })
 
-const app = new Vue({
-  el: '#app',
-  // Implement this!
-})
+  const app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        hash: window.location.hash,
+        routeTable,
+        NotFound
+      }
+    }
+  })
 </script>
