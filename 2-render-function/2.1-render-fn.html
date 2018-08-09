@@ -1,8 +1,8 @@
 <script src="../node_modules/vue/dist/vue.js"></script>
 <style>
-#welcome.red {
-  color: red;
-}
+  #welcome.red {
+    color: red;
+  }
 </style>
 
 <div id="app">
@@ -11,14 +11,24 @@
 </div>
 
 <script>
-new Vue({
-  el: '#app',
-  data: {
-    isRed: true,
-    msg: 'This should be red'
-  },
-  render (h) {
-    // implement this
-  }
-})
+  new Vue({
+    el: '#app',
+    data: {
+      isRed: true,
+      msg: 'This should be red'
+    },
+    render(h) {
+      return h('div', { attrs: { id: 'app' } }, [
+        h('h1', {
+          attrs: { id: 'welcome' },
+          class: { red: this.isRed }
+        }, this.msg),
+        h('button', {
+          on: {
+            click: () => { this.isRed = !this.isRed }
+          }
+        }, 'toggle red')
+      ])
+    }
+  })
 </script>
