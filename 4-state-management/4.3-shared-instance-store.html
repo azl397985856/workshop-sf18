@@ -8,18 +8,33 @@
 </div>
 
 <script>
-// copy and modify the first exercise to use a Vue instance as
-// a shared store instead.
-const state = new Vue({
-  // Implement this!
-})
+  // copy and modify the first exercise to use a Vue instance as
+  // a shared store instead.
+  const state = new Vue({
+    data: {
+      count: 0
+    }
+  })
 
-const Counter = {
-  // Implement this!
-}
+  const Counter = {
+    data() {
+      return state;
+    },
+    template: "<div>{{count}}</div>"
+  }
 
-new Vue({
-  el: '#app',
-  // Implement this!
-})
+
+
+
+  const app = new Vue({
+    el: '#app',
+    methods: {
+      inc() {
+        state.count = state.count + 1;
+      }
+    },
+    components: {
+      counter: Counter
+    }
+  })
 </script>
